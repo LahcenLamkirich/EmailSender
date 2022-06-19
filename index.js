@@ -2,14 +2,19 @@ const express = require('express');
 const app = express() ;
 const nodemailer = require('nodemailer');
 const path = require('path');
-
-
+const bodyParser = require('body-parser');
 require('dotenv').config()
 
-
+// Body Parser Middleware : 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 // the views : 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
+// public css 
+app.use('/public', express.static('public'));
+
+// the routes : 
 
 app.get("/", (req,res) => {
     res.render('index')

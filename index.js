@@ -32,8 +32,8 @@ app.post('/sendEmail', urlencoded, (req,res) => {
         port: 465,
         secure: true,
         auth: {
-            user: "lahcen.lamkirich@gmail.com",
-            pass: "lahcen"
+            user: "lam06.dev@gmail.com",
+            pass: "123lahcen456789@@!#$(*97"
         },
         tls: {
             rejectUnauthorized: false 

@@ -3,6 +3,9 @@ const app = express() ;
 const nodemailer = require('nodemailer');
 const path = require('path');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const linereader = require("line-reader");
+
 require('dotenv').config()
 
 // Body Parser Middleware : 
@@ -25,6 +28,13 @@ app.get("/", (req,res) => {
 
 app.post('/sendEmail', urlencoded, (req,res) => {
 
+    // console.log("The file is : " + req.body.emailList);
+    // const fileContent = fs.readFileSync(req.body.emailList);
+    // console.log('content : ' + fileContent)
+
+    console.log("---------------------------------------")
+
+
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -38,9 +48,13 @@ app.post('/sendEmail', urlencoded, (req,res) => {
         }
     });
 
+    linereader.eachLine(req.body.emailList, (email) => {
+        console.log(email)
+    })
+
     let options = {
         from: req.body.emailSender,
-        to: req.body.emailReceiver,
+        to: "lam06.dev@gmail.com, l.lamkirich_etu@enset-media.ac.ma",
         subject: req.body.subject,
         text: req.body.bodyMsg,
     };

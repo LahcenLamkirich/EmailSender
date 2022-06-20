@@ -16,19 +16,27 @@ app.use('/public', express.static('public'));
 
 // the routes : 
 
+var urlencoded = bodyParser.urlencoded({extended:false});
+
 app.get("/", (req,res) => {
-    res.render('index')
+    res.render('index', {text: "This is lahcen Lamkirich"})
 });
 
 
-app.post('/sendEmail', (req,res) => {
+app.post('/sendEmail', urlencoded, (req,res) => {
+
+    console.log("The Email sender is : " + req.body.emailSender);
+
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
         secure: true,
         auth: {
             user: "lahcen.lamkirich@gmail.com",
-            pass: "mother62"
+            pass: "lahcen"
+        },
+        tls: {
+            rejectUnauthorized: false 
         }
     });
 

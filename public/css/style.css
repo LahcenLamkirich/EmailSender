@@ -4,13 +4,14 @@ body {
     display: flex;
     justify-content: center;
     height: 100vh;
+    color: white;
   }
   
   .form {
     background-color: #15172b;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 500px;
+    height: 700px;
     padding: 20px;
     width: 350px;
   }
@@ -122,7 +123,7 @@ body {
     background-color: #06b;
   }
   
-
-  .lahcen {
-    color: red ;
+  .file {
+    margin-top: 10%;
+    font-size: 18px;
   }

@@ -25,8 +25,6 @@ app.get("/", (req,res) => {
 
 app.post('/sendEmail', urlencoded, (req,res) => {
 
-    console.log("The Email sender is : " + req.body.emailSender);
-
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -41,10 +39,10 @@ app.post('/sendEmail', urlencoded, (req,res) => {
     });
 
     let options = {
-        from: "lahcen.lamkirich@gmail.com",
-        to: "l.lamkirich_etu@enset-media.ac.ma",
-        subject: "Recherche de stage",
-        text: "My Resumer is here",
+        from: req.body.emailSender,
+        to: req.body.emailReceiver,
+        subject: req.body.subject,
+        text: req.body.bodyMsg,
     };
 
     transporter.sendMail(options, (err, data) => {
@@ -53,7 +51,7 @@ app.post('/sendEmail', urlencoded, (req,res) => {
                 res.send("Error" + err)
             }else {
                 console.log("Message %s sent : %s ", data.messageId, data.response)
-                res.send("Email sent Successfully !")
+                res.send("Email Sent Succesfully !")
             }
     });
 

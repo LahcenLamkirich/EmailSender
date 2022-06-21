@@ -4,9 +4,8 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const linereader = require("line-reader");
-const readline = require('readline');
 require('dotenv').config()
+const ejs = require('ejs');
 
 // Body Parser Middleware : 
 app.use(bodyParser.json());
@@ -70,9 +69,10 @@ app.post('/sendEmail', urlencoded, (req,res) => {
                 if(err){
                     console.error(err)
                     res.send("Error" + err)
-                }else {
+                } else {
                     console.log("Message %s sent : %s ", data.messageId, data.response)
-                    res.send("Email Sent Succesfully !")
+                    res.setHeader("content", "nothing")
+                    res.render('sentEmail') 
                 }
         });
     })

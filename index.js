@@ -48,18 +48,15 @@ app.post('/sendEmail', urlencoded, (req,res) => {
         }
     });
 
-    const mailList = ["lahcen.lamkirich@gmail.com"] 
-    linereader.eachLine(req.body.emailList, (email,err) => {  
-        if(!err) {
+    let mailList = ["lahcen@gmail.com"] 
+    linereader.eachLine(req.body.emailList, (email) => {  
             console.log(email) // here i got list of emails 
             mailList.push(email)
-        }else {
-            console.log("err" + err)
-        }
-    })
+    });
 
 
     console.log("The Length of the list is : " + mailList.length);
+
 
     console.log("The first Email is : " + mailList[0])
     let options = {

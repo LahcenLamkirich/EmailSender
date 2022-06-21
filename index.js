@@ -48,26 +48,44 @@ app.post('/sendEmail', urlencoded, (req,res) => {
         }
     });
 
-    linereader.eachLine(req.body.emailList, (email) => {
-        console.log(email)
+    const mailList = ["lahcen.lamkirich@gmail.com"] 
+    linereader.eachLine(req.body.emailList, (email,err) => {  
+        if(!err) {
+            console.log(email) // here i got list of emails 
+            mailList.push(email)
+        }else {
+            console.log("err" + err)
+        }
     })
 
+
+    console.log("The Length of the list is : " + mailList.length);
+
+    console.log("The first Email is : " + mailList[0])
     let options = {
         from: req.body.emailSender,
-        to: "lam06.dev@gmail.com, l.lamkirich_etu@enset-media.ac.ma",
+        to: mailList[0],
         subject: req.body.subject,
         text: req.body.bodyMsg,
+        attachments: [
+            {   
+                filename: req.body.resume,
+                content: fs.createReadStream(req.body.resume)
+            },
+        ]
     };
 
-    transporter.sendMail(options, (err, data) => {
-            if(err){
-                console.error(err)
-                res.send("Error" + err)
-            }else {
-                console.log("Message %s sent : %s ", data.messageId, data.response)
-                res.send("Email Sent Succesfully !")
-            }
-    });
+        transporter.sendMail(options, (err, data) => {
+                if(err){
+                    console.error(err)
+                    res.send("Error" + err)
+                }else {
+                    console.log("Message %s sent : %s ", data.messageId, data.response)
+                    res.send("Email Sent Succesfully !")
+                }
+        });
+
+
 
 })
 

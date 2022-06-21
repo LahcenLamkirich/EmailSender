@@ -126,4 +126,9 @@ body {
   .file {
     margin-top: 10%;
     font-size: 18px;
+    margin-bottom: 7%;
+  }
+  .file1 {
+    font-size: 18px;
+    font-family: sans-serif;
   }

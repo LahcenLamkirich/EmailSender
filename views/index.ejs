@@ -15,29 +15,35 @@
       <div class="form">
             <div class="title">Email Sender App </div>
             <div class="subtitle"> Let's get started ! </div>
+
             <div class="input-container ic1">
-            <input id="emailSender" class="input" name="emailSender" type="text" placeholder=" " />
-            <div class="cut"></div>
-            <label for="emailSender" class="placeholder">Email Sender</label>
+                <input id="emailSender" class="input" name="emailSender" type="text" placeholder=" " />
+                <label for="emailSender" class="placeholder">Email Sender</label>
             </div>
-            <!-- <div class="input-container ic1">
-                <input id="emailReceiver" class="input" name="emailReceiver"  type="text" placeholder=" " />
-                <div class="cut"></div>
-                <label for="emailReceiver" class="placeholder">Email Receiver</label>
-            </div> -->
+
             <div class="input-container ic1">
                 <input id="subject" class="input" name="subject"  type="text" placeholder=" " />
                 <div class="cut"></div>
                 <label for="subject" class="placeholder">Subject</label>
             </div>
+
             <div class="input-container ic2">
-            <textarea id="bodyMsg" class="input" type="text" name="bodyMsg"  placeholder=" "></textarea>
-            <div class="cut cut-short"></div>
-            <label for="bodyMsg" class="placeholder">Text</label>
+                <textarea id="bodyMsg" class="input" type="text" name="bodyMsg"  placeholder=" "></textarea>
+                <label for="bodyMsg" class="placeholder">Text</label>
             </div>
-            <input class="file" type="file" id="emailList" name="emailList" accept=".txt, .docx, .pdf">
-            <input class="file" type="file" id="resume" name="resume" title="Your resumer Here" multiple>
+
+            <div class="emLis">
+                <label for="emailList"> Choose the Email List (Receivers) </label>
+                <input class="file" type="file" id="emailList" name="emailList" accept=".txt, .docx, .pdf">
+            </div>
+
+            <div class="res">
+                <label for="resume"> Choose Your Resume (Cv etc ..) </label>
+                <input class="file" type="file" id="resume" name="resume" title="Your resumer Here" multiple>
+            </div>
+
             <button type="text" class="submit">Send Email </button>
+
         </div>
     </form>
 </body>

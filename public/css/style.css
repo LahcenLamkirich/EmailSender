@@ -132,3 +132,15 @@ body {
     font-size: 18px;
     font-family: sans-serif;
   }
+
+  .emLis {
+    margin-top: 15px;
+    font-family: sans-serif;
+    font-size: 17px;
+    text-decoration: underline;
+  }
+  .res {
+    font-family: sans-serif;
+    font-size: 17px;
+    text-decoration: underline;
+  }

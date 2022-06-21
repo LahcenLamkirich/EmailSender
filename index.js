@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const linereader = require("line-reader");
-
+const readline = require('readline');
 require('dotenv').config()
 
 // Body Parser Middleware : 
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs')
 // public css 
 app.use('/public', express.static('public'));
 
-// the routes : 
+// The routes : 
 
 var urlencoded = bodyParser.urlencoded({extended:false});
 
@@ -27,13 +27,6 @@ app.get("/", (req,res) => {
 
 
 app.post('/sendEmail', urlencoded, (req,res) => {
-
-    // console.log("The file is : " + req.body.emailList);
-    // const fileContent = fs.readFileSync(req.body.emailList);
-    // console.log('content : ' + fileContent)
-
-    console.log("---------------------------------------")
-
 
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -48,20 +41,19 @@ app.post('/sendEmail', urlencoded, (req,res) => {
         }
     });
 
-    let mailList = ["lahcen@gmail.com"] 
-    linereader.eachLine(req.body.emailList, (email) => {  
-            console.log(email) // here i got list of emails 
-            mailList.push(email)
+    let mailList = [] 
+
+    const allFileContents = fs.readFileSync(req.body.emailList, 'utf-8');
+
+    allFileContents.split(/\r?\n/).forEach(line =>  {
+      console.log(`Line from file: ${line}`);
+      mailList.push(line)
     });
 
 
-    console.log("The Length of the list is : " + mailList.length);
-
-
-    console.log("The first Email is : " + mailList[0])
     let options = {
         from: req.body.emailSender,
-        to: mailList[0],
+        // to: mailList[0],
         subject: req.body.subject,
         text: req.body.bodyMsg,
         attachments: [
@@ -72,6 +64,8 @@ app.post('/sendEmail', urlencoded, (req,res) => {
         ]
     };
 
+    mailList.forEach(email => {
+        options.to = email ;
         transporter.sendMail(options, (err, data) => {
                 if(err){
                     console.error(err)
@@ -81,10 +75,11 @@ app.post('/sendEmail', urlencoded, (req,res) => {
                     res.send("Email Sent Succesfully !")
                 }
         });
+    })
 
 
 
-})
+}) // end of Post : 
 
 app.listen(8000, () => {
     console.log("Listening in the port 8000 ... ")
